@@ -1,0 +1,12 @@
+拉取
+docker pull mysql:8.0.23
+
+启动脚本
+#!/bin/sh
+echo "开始运行Mysql"
+containerList=`docker ps -a|grep mysql|awk '{print $2}'`
+if ["$containerList" = ""]; then
+        docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0.23
+else
+        docker start mysql-test
+fi
